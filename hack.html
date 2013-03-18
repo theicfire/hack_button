@@ -1,0 +1,21 @@
+<head>
+  <title>hack</title>
+</head>
+
+<body>
+  {{> hackboard}}
+</body>
+
+
+<template name="hackboard">
+  {{#each people}}
+    {{name}}
+  {{/each}}
+
+  <form class='add-user-form'>
+    <input type='text' class='twitter-handle' placeholder="Your Twitter handler">
+    <input type='submit' value='add user'>
+  </form>
+  <input type='button' class='logout' value='logout'>
+
+</template>

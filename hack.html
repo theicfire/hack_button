@@ -9,11 +9,15 @@
 
 <template name="hackboard">
   {{#each people}}
-    {{name}}
+    <div>
+      <b>Name</b>:{{name}} 
+      <b>Location</b>:{{location}}
+    </div>
   {{/each}}
 
   <form class='add-user-form'>
     <input type='text' class='twitter-handle' placeholder="Your Twitter handler">
+    <input type='text' class='location' placeholder="Your location">
     <input type='submit' value='add user'>
   </form>
   <input type='button' class='logout' value='logout'>

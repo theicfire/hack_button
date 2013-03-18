@@ -10,11 +10,12 @@ if (Meteor.isClient) {
     'submit form.add-user-form': function () {
       console.log('adding something', $('.twitter-handle').val());
         var name = $('.twitter-handle').val();
+        var location = $('.location').val();
         console.log('updating with name, session', name, Session.get('user_id'));
         if (Session.get('user_id')) {
-          People.update({_id: Session.get('user_id')}, {name: name});
+          People.update({_id: Session.get('user_id')}, {name: name, location:location});
         } else {
-          People.insert({name:name}, function(error, _id) {
+          People.insert({name:name, location:location}, function(error, _id) {
             console.log('added new name', error, _id);
             Session.set('user_id', _id);
           });
@@ -56,8 +57,9 @@ if (Meteor.isServer) {
       console.log('populating');
       var names = ["Chase Lambert",
                     "Adam Chu"];
+      var loc = ["Maseeh Basement", "Wormhole"];
       for (var i = 0; i < names.length; i++) {
-        People.insert({name: names[i]});
+        People.insert({name: names[i], location: loc[i]});
       }
     }
     

@@ -6,8 +6,8 @@ if (Meteor.isClient) {
   //   return "Welcome to hack.";
   // };
 
-  Template.hackboard.events({
-    'submit form.add-user-form': function () {
+  Template.name_form.events({
+        'submit form.add-user-form': function () {
       console.log('adding something', $('.twitter-handle').val());
         var name = $('.twitter-handle').val();
         var location = $('.location').val();
@@ -22,7 +22,9 @@ if (Meteor.isClient) {
         }
 
         return false;
-    },
+    }
+  });
+  Template.hackboard.events({
     'click .logout': function() {
       People.remove({_id: Session.get('user_id')});
       Session.set('user_id', null);
@@ -30,7 +32,8 @@ if (Meteor.isClient) {
   });
 
   Template.hackboard.people = function() {
-    return People.find({});
+    // return People.find({}, {sort: -1});
+    return reverseCollection(People.find({}));
   };
 
   // Template.hello.events({
@@ -38,14 +41,14 @@ if (Meteor.isClient) {
   //     console.log("You pressed the button");
   //    });
   //   });
-  Meteor.setInterval(function() {
-    console.log('updating connection');
-    if (Connections.findOne({_id: Session.get('user_id')})) {
-      Connections.update({_id: Session.get('user_id')}, {'keepalive': (new Date()).getTime()});
-    } else {
-      Connections.insert({_id: Session.get('user_id'), 'keepalive': (new Date()).getTime()});
-    }
-  }, 1000);
+  // Meteor.setInterval(function() {
+  //   console.log('updating connection');
+  //   if (Connections.findOne({_id: Session.get('user_id')})) {
+  //     Connections.update({_id: Session.get('user_id')}, {'keepalive': (new Date()).getTime()});
+  //   } else {
+  //     Connections.insert({_id: Session.get('user_id'), 'keepalive': (new Date()).getTime()});
+  //   }
+  // }, 1000);
 }
 
 
@@ -77,4 +80,15 @@ if (Meteor.isServer) {
     });
   }, 1000);
 
+}
+
+var reverseCollection = function(collection) {
+  var ret = [];
+
+  collection.forEach(function(data){
+    ret.push(data);
+  });
+
+  ret.reverse();
+  return ret;
 }

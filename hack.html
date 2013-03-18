@@ -1,25 +1,153 @@
-<head>
-  <title>hack</title>
+    <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery Mobile Docs - Switch</title>
+<!--  <link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+  <link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
+  <script src="../../../js/jquery.js"></script>
+  <script src="../../../docs/_assets/js/jqm-docs.js"></script>
+  <script src="../../../js/jquery.mobile.js"></script>
+    -->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+<!-- <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script> -->
+<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+<style type="text/css">
+
+    div.ui-slider-switch {
+        
+        height:100px;
+        
+    }
+    .ui-field-contain div.ui-slider-switch, .ui-field-contain.ui-hide-label div.ui-slider-switch {
+        width:400px;
+    }
+    span.ui-slider-label {
+        font-size:40px;
+    }
+    
+    span.socmedia {
+        text-align:right;
+    }
+    span.socmedia img {
+        width:30px;
+        height:30px;
+        position:relative;
+        top:10px;
+        
+    }
+    
+    #chatlist {
+        font-family:"Myriad Pro";
+        text-shadow:none;
+        
+    }
+    #chatlist li{
+        list-style-type: none; 
+        font-weight:normal;
+    }
+    
+    #chatlist ul
+    {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    }
+    
+    #chatlist li { margin: 0 0 0 0; }
+    
+    #chatlist a
+    {
+    display: block;
+    color: #FFF;
+    background-color: #31353e;
+    /*width: 9em;*/
+    padding: .8em 1em;
+    text-decoration: none;
+    font-weight:normal;
+    color:#b7bac2;
+    }
+    
+    #chatlist a:hover
+    {
+    background-color: #369;
+    color: #FFF;
+    }
+    
+    #chatlist a span {
+        /*float:left;
+        min-width:70px;
+        height:30px;
+        
+        border:1px solid pink;*/
+        padding-right:50px;
+    }
+    
+    #chatlist .chatsts {
+        display:none;
+        background:color:red;
+        background-image:url('media/chatstsbg_on.png');
+        background-size:cover;
+        
+    }
+    
+    
+
+
+
+    
+</style>
 </head>
-
 <body>
-  {{> hackboard}}
+<input type='button' class='logout' value='logout'>
+
+
+  <br><br><br><br>
+
+    <div  style="margin: 0 auto">
+
+{{>name_form}}
+{{>hackboard}}
+ </div>
 </body>
-
-
+<template name="name_form">
+        <form class='add-user-form'>
+        <div data-role="fieldcontain" style="width:500px;margin: 0 auto">
+          <label for="flip-3" style="font-size:40px;width:100%"><span style="font-size:40px;width:100%">Hack Mode:
+             
+                     
+          </span> </label><br>
+          <select name="flip-3" id="flip-3" data-role="slider" style="float:left" data-theme="a">
+            <option value="off">Off</option>
+            <option value="onn">On</option>
+          </select>
+                    <br />
+                    <br />
+                     <input type="text" class='twitter-handle' placeholder="Username" style="width:66%"/><span class="socmedia"><a href="#"><img src="media/fbbtn.png" /></a><a href="#"><img src="media/twitterbtn.png" /></a></span>
+                    <br />
+                    <input type="text" placeholder="Location" class='location' />
+                    <br />
+                    <!-- <input type="text" placeholder="Time (Optional)" />
+                    <br /> -->
+                    <!-- <input type="text" placeholder="What are you hacking? (Optional)" /> -->
+        </div>
+        <input type='submit'>
+    </form>
+</template>
 <template name="hackboard">
-  {{#each people}}
-    <div>
-      <b>Name</b>:{{name}} 
-      <b>Location</b>:{{location}}
-    </div>
-  {{/each}}
+  
 
-  <form class='add-user-form'>
-    <input type='text' class='twitter-handle' placeholder="Your Twitter handler">
-    <input type='text' class='location' placeholder="Your location">
-    <input type='submit' value='add user'>
-  </form>
-  <input type='button' class='logout' value='logout'>
+  
+                
+                <div id="chatlist" style="float:right;border:1px solid gray;width:400px;height:1000px;position:absolute;top:0;right:0"> 
+                    <ul>
+                    {{#each people}}
+                        <div>
+                          <li><a><span class="chatname">{{name}}</span><span class="chatloc">{{location}}</span><span class="chatsts">&nbsp;</span></a></li>
+                        </div>
+                      {{/each}}
+                    </ul>
+                </div>
+   
+        
 
 </template>

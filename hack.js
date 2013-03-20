@@ -33,6 +33,7 @@ if (Meteor.isClient) {
 
   Template.hackboard.people = function() {
     // return People.find({}, {sort: -1});
+    console.log(People.find({}));
     return reverseCollection(People.find({}));
   };
 

@@ -2,15 +2,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>jQuery Mobile Docs - Switch</title>
-<!--    <link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
-    <link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
-    <script src="../../../js/jquery.js"></script>
-    <script src="../../../docs/_assets/js/jqm-docs.js"></script>
-    <script src="../../../js/jquery.mobile.js"></script>
-    -->
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+<script type="text/javascript">
+  $(function() {
+    // super hack :(
+    $('.hack-button').change(function() {
+      $(this).trigger('click');
+    })
+  });
+</script>
 <style type="text/css">
 
     div.ui-slider-switch {
@@ -33,7 +34,6 @@
         height:30px;
         position:relative;
         top:10px;
-        
     }
     
     #chatlist {
@@ -111,32 +111,40 @@
 
 <template name="name_form">
 <div data-role="fieldcontain" style="width:500px;margin: 0 auto">
-                    <label for="flip-3" style="font-size:40px;width:100%"><span style="font-size:40px;width:100%">Hack Mode:
+                    <label for="flip-3" style="font-size:40px;width:100%"><span style="font-size:40px;width:100%" class='hack-button-title'>Hack Mode:
                      
                      
                     </span> </label><br>
-                    <select name="flip-3" id="flip-3" data-role="slider" style="float:left" data-theme="a">
+                    <select name="flip-3" id="flip-3" data-role="slider" style="float:left" data-theme="a" class='hack-button'>
                         <option value="off">Off</option>
                         <option value="onn">On</option>
                     </select>
                     <br />
                     <br />
-                     <input type="text" placeholder="Username" style="width:66%"/><span class="socmedia"><a href="#"><img src="media/fbbtn.png" /></a><a href="#"><img src="media/twitterbtn.png" /></a></span>
+                     <input type="text" placeholder="Username" style="width:66%" class='field-updater twitter-handle' value=""/>
+
+                     <span class="socmedia"><a href="#"><img src="media/fbbtn.png" /></a><a href="#"><img src="media/twitterbtn.png" /></a></span>
                     <br />
-                    <input type="text" placeholder="Location" />
+                    <input type="text" placeholder="Location" class='field-updater location' />
                     <br />
                     <input type="text" placeholder="Time (Optional)" />
                     <br />
                     <input type="text" placeholder="What are you hacking? (Optional)" />
                 </div>
 </template>
+<template name="person_name">
+    hello
+</template>
 <template name="hackboard">
-    <div id="chatlist" style="float:right;border:1px solid gray;width:400px;height:1000px;position:absolute;top:0;right:0"> 
+                <div id="chatlist" style="float:right;border:1px solid gray;width:400px;height:1000px;position:absolute;top:0;right:0"> 
                     <ul>
-                        <li><a><span class="chatname">aoeuaoeuaoeua</span><span class="chatloc">w20 1st floor</span><span class="chatsts">&nbsp;</span></a></li>
-                        <li><a>abmvbvwmb</a></li>
-                        <li><a>afgrgc</a></li>
-                        <li><a>fgrcgfrfga</a></li>
+                    {{#each people}}
+                        {{#if is_valid_name_location name location mode}}
+                        <div>
+                          <li><a><span class="chatname">{{name}}</span><span class="chatloc">{{location}}</span><span class="chatsts">&nbsp;</span></a></li>
+                        </div>
+                        {{/if}}
+                      {{/each}}
                     </ul>
                 </div>
 </template>
